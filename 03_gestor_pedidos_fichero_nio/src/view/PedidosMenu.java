@@ -2,7 +2,7 @@ package view;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import model.Pedido;
@@ -29,7 +29,9 @@ public class PedidosMenu {
 					case 3:
 						pedidosEntreFechas();
 						break;
-					case 4:
+					case 4: 
+						eliminarPedido();
+					case 5:
 						System.out.println("Adios!");
 						break;
 					
@@ -40,17 +42,19 @@ public class PedidosMenu {
 			catch(NumberFormatException ex) {
 				System.out.println("Debe ser un valor numérico!!");
 			}
-		}while(opcion!=4);
+		}while(opcion!=5);
 	}
 	static void presentarMenu() {
 		System.out.println("""
 				1.- Agregar Pedido
 				2.- Pedido más reciente
 				3.- Pedidos entre fechas
-				4.- Salir
+				4. - Eliminar pedido
+				5.- Salir
 				
 				""");
 	}
+	
 	static void agregarPedido()  {
 		Scanner sc=new Scanner(System.in);
 		DateTimeFormatter sdf=DateTimeFormatter.ofPattern("dd/MM/yyyy");		
@@ -63,6 +67,7 @@ public class PedidosMenu {
 		Pedido p=new Pedido(producto, unidades, fecha);
 		service.nuevoPedido(p);
 	}
+	
 	static void mostrarReciente() {
 		Pedido p=service.pedidoMasReciente();
 		DateTimeFormatter sdf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -70,6 +75,7 @@ public class PedidosMenu {
 		System.out.print("Unidades: "+p.getUnidades()+" ");
 		System.out.println("Fecha pedido: "+p.getFechaPedido().format(sdf)+" ");
 	}
+	
 	static void pedidosEntreFechas(){
 		Scanner sc=new Scanner(System.in);
 		DateTimeFormatter sdf=DateTimeFormatter.ofPattern("dd/MM/yyyy");	
@@ -77,12 +83,19 @@ public class PedidosMenu {
 		LocalDate fecha1=LocalDate.parse(sc.nextLine(),sdf);	
 		System.out.println("Fecha límite (dia/mes/año):");
 		LocalDate fecha2=LocalDate.parse(sc.nextLine(),sdf);	
-		ArrayList<Pedido> pedidosEncontrados=service.pedidosEntreFechas(fecha1, fecha2);
+		List<Pedido> pedidosEncontrados=service.pedidosEntreFechas(fecha1, fecha2);
 		for(Pedido p:pedidosEncontrados) {
 			System.out.print("Producto: "+p.getProducto()+" ");
 			System.out.print("Unidades: "+p.getUnidades()+" ");
 			System.out.println("Fecha pedido: "+p.getFechaPedido().format(sdf)+" ");
-		}
+		}	
+	}
+	
+	static void eliminarPedido() {
+		Scanner sc= new Scanner(System.in);		
+		System.out.println("Escribe el pedido a eliminar");
+		String pedido = sc.nextLine();
+		service.eliminarPedido(pedido);
 	}
 
 }
