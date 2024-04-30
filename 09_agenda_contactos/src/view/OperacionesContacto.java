@@ -10,9 +10,10 @@ public class OperacionesContacto {
 		ContactoService service = new ContactoService();
 		
 		Contacto cto = new Contacto(8,"josefina", "josefina@gmail.com", 24); 
-	//	service.agregarContacto(cto);
-	//	 service.actualizarContacto("josefina@gmail.com", 28);
-	//	 service.eliminarContacto("pepiño@gmail.com");
+	//	service.nuevoContacto(cto);
+	//	 service.actualizarContacto("josefina@gmail.com", 21);
+		Contacto eliminado =  service.eliminarContacto("josefina@gmail.com");
+   //   
 	}
 
 }

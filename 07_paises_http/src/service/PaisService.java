@@ -31,8 +31,7 @@ sobre paises. Cada pais se caracteriza por: nombre,continente,capital,habitantes
 
 public class PaisService {
 
-	String dir = "C:\\temp\\paises.json";
-	
+		
 	public Stream<Pais> getPaises() {
 		Gson gson=new Gson();
 		
