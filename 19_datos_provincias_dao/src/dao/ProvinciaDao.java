@@ -1,5 +1,10 @@
 package dao;
 
-public interface ProvinciaDao {
+import java.util.List;
 
+import model.Provincia;
+
+public interface ProvinciaDao {
+	void saveProvincias(List<Provincia> provincias);
+	List<String> findCodigos();
 }
