@@ -11,6 +11,7 @@ public class Lanzador  {
 	
 	public static void main(String[] args) {
 	
+		// al ejecutar una función lambda se está realizando una función runnable, por eso no hace falta crearla explicitamente
 		ComercioService service = ComercioServiceFactory.getComercioService();
 		new Thread(()-> service.guardarPedido(ruta1, "tienda1")).start();
 		new Thread(()-> service.guardarPedido(ruta2, "tienda2")).start();
