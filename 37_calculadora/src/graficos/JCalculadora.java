@@ -1,11 +1,13 @@
 package graficos;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class JCalculadora extends JFrame {
@@ -56,6 +58,36 @@ public class JCalculadora extends JFrame {
 			tex2.setText("");
 		});
 		
+		FocusListener listener1 = new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				JTextField jtf = (JTextField)e.getSource(); // devuelve un objet pero como sabemos que debe ser un JTextField pues lo casteamos. obtiene una referencia a la caja en la que se ha producido el evento
+				if(jtf.getText().isEmpty()) {
+					jtf.setText("0");
+					return;
+				}
+				try {
+					Integer.parseInt(jtf.getText()); // si no consigue parsearlo da error 
+				}catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(JCalculadora.this ,  "debes escribir un número");
+					jtf.requestFocus(); // si da error (si no hemos metido un número) mantiene el foco en la caja
+					jtf.selectAll(); // selecciona el texto introducido
+				}
 				
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		
+		// asociamos el listener a las dos cajas
+		tex1.addFocusListener(listener1);
+		tex2.addFocusListener(listener1);				
 	}
 }

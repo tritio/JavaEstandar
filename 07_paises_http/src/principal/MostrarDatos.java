@@ -8,8 +8,7 @@ public class MostrarDatos {
 
 		var paisesService = new PaisService();
 		
-		System.out.println(paisesService.listarContinentes());
-		
+		paisesService.listarContinentes().forEach(System.out::println);
 
 	}
 
