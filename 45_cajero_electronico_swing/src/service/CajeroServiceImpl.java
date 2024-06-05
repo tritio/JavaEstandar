@@ -19,7 +19,7 @@ class CajeroServiceImpl implements CajeroService {
 	public CajeroServiceImpl() {
 		clientesDao = CajeroDaoFactory.getClientesDao();
 		cuentasDao = CajeroDaoFactory.getCuentasDao();
-		clientesDao = CajeroDaoFactory.getClientesDao();
+		movimientosDao = CajeroDaoFactory.getMovimientosDao();
 	}
 		
 	@Override
